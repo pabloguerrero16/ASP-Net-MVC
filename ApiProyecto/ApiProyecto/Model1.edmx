@@ -1,0 +1,731 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ProyectoG7Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CANTON">
+          <Key>
+            <PropertyRef Name="ConCanton" />
+          </Key>
+          <Property Name="ConCanton" Type="bigint" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="35" Nullable="false" />
+          <Property Name="IdProvincia" Type="bigint" />
+        </EntityType>
+        <EntityType Name="CARRITO">
+          <Key>
+            <PropertyRef Name="ConCarrito" />
+          </Key>
+          <Property Name="ConCarrito" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConUsuario" Type="bigint" Nullable="false" />
+          <Property Name="ConProducto" Type="bigint" Nullable="false" />
+          <Property Name="Cantidad" Type="int" Nullable="false" />
+          <Property Name="FechaCarrito" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="ConCategoria" />
+          </Key>
+          <Property Name="ConCategoria" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DETALLE">
+          <Key>
+            <PropertyRef Name="ConDetalle" />
+          </Key>
+          <Property Name="ConDetalle" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConMaestro" Type="bigint" Nullable="false" />
+          <Property Name="ConProducto" Type="bigint" Nullable="false" />
+          <Property Name="CantidadCompra" Type="int" Nullable="false" />
+          <Property Name="PrecioCompra" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Impuesto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAESTRO">
+          <Key>
+            <PropertyRef Name="ConMaestro" />
+          </Key>
+          <Property Name="ConMaestro" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConUsuario" Type="bigint" Nullable="false" />
+          <Property Name="TotalFactura" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FechaCompra" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MARCA">
+          <Key>
+            <PropertyRef Name="ConMarca" />
+          </Key>
+          <Property Name="ConMarca" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MODELO">
+          <Key>
+            <PropertyRef Name="ConModelo" />
+          </Key>
+          <Property Name="ConModelo" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="ConProducto" />
+          </Key>
+          <Property Name="ConProducto" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConModelo" Type="bigint" />
+          <Property Name="ConMarca" Type="bigint" />
+          <Property Name="ConCategoria" Type="bigint" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Stock" Type="bigint" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Imagen" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROVINCIA">
+          <Key>
+            <PropertyRef Name="ConProvincia" />
+          </Key>
+          <Property Name="ConProvincia" Type="bigint" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="45" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="ConRol" />
+          </Key>
+          <Property Name="ConRol" Type="bigint" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ConUsuario" />
+          </Key>
+          <Property Name="ConUsuario" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Identificacion" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Correo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="Contrasenna" Type="varchar" MaxLength="150" Nullable="false" />
+          <Property Name="ConRol" Type="bigint" />
+          <Property Name="ConProvincia" Type="bigint" />
+          <Property Name="ConCanton" Type="bigint" />
+          <Property Name="Imagen" Type="varchar" MaxLength="250" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__CANTON__IdProvin__3B75D760">
+          <End Role="PROVINCIA" Type="Self.PROVINCIA" Multiplicity="0..1" />
+          <End Role="CANTON" Type="Self.CANTON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVINCIA">
+              <PropertyRef Name="ConProvincia" />
+            </Principal>
+            <Dependent Role="CANTON">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__ConCat__5165187F">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="ConCategoria" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ConCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__ConMar__5070F446">
+          <End Role="MARCA" Type="Self.MARCA" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MARCA">
+              <PropertyRef Name="ConMarca" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ConMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__ConMod__4F7CD00D">
+          <End Role="MODELO" Type="Self.MODELO" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODELO">
+              <PropertyRef Name="ConModelo" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ConModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ConCant__403A8C7D">
+          <End Role="CANTON" Type="Self.CANTON" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CANTON">
+              <PropertyRef Name="ConCanton" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ConCanton" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ConProv__3F466844">
+          <End Role="PROVINCIA" Type="Self.PROVINCIA" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVINCIA">
+              <PropertyRef Name="ConProvincia" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ConProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ConRol__3E52440B">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="ConRol" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ConRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAESTRO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="MAESTRO" Type="Self.MAESTRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ConUsuario" />
+            </Principal>
+            <Dependent Role="MAESTRO">
+              <PropertyRef Name="ConUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ConsultarProductos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="IniciarSesion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasenna" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="PagarCarrito_SP" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ConUsuario" Type="bigint" Mode="In" />
+        </Function>
+        <Function Name="RegistrarCuenta" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Cedula" Type="varchar" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+          <Parameter Name="Correo" Type="varchar" Mode="In" />
+          <Parameter Name="Contrasenna" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="ProyectoG7ModelStoreContainer">
+          <EntitySet Name="CANTON" EntityType="Self.CANTON" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CARRITO" EntityType="Self.CARRITO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DETALLE" EntityType="Self.DETALLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MAESTRO" EntityType="Self.MAESTRO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MARCA" EntityType="Self.MARCA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="MODELO" EntityType="Self.MODELO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROVINCIA" EntityType="Self.PROVINCIA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__CANTON__IdProvin__3B75D760" Association="Self.FK__CANTON__IdProvin__3B75D760">
+            <End Role="PROVINCIA" EntitySet="PROVINCIA" />
+            <End Role="CANTON" EntitySet="CANTON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__ConCat__5165187F" Association="Self.FK__PRODUCTO__ConCat__5165187F">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__ConMar__5070F446" Association="Self.FK__PRODUCTO__ConMar__5070F446">
+            <End Role="MARCA" EntitySet="MARCA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__ConMod__4F7CD00D" Association="Self.FK__PRODUCTO__ConMod__4F7CD00D">
+            <End Role="MODELO" EntitySet="MODELO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ConCant__403A8C7D" Association="Self.FK__USUARIO__ConCant__403A8C7D">
+            <End Role="CANTON" EntitySet="CANTON" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ConProv__3F466844" Association="Self.FK__USUARIO__ConProv__3F466844">
+            <End Role="PROVINCIA" EntitySet="PROVINCIA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ConRol__3E52440B" Association="Self.FK__USUARIO__ConRol__3E52440B">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAESTRO_USUARIO" Association="Self.FK_MAESTRO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="MAESTRO" EntitySet="MAESTRO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ProyectoG7Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CANTON">
+          <Key>
+            <PropertyRef Name="ConCanton" />
+          </Key>
+          <Property Name="ConCanton" Type="Int64" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="35" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IdProvincia" Type="Int64" />
+          <NavigationProperty Name="PROVINCIA" Relationship="Self.FK__CANTON__IdProvin__3B75D760" FromRole="CANTON" ToRole="PROVINCIA" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__USUARIO__ConCant__403A8C7D" FromRole="CANTON" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="CARRITO">
+          <Key>
+            <PropertyRef Name="ConCarrito" />
+          </Key>
+          <Property Name="ConCarrito" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConUsuario" Type="Int64" Nullable="false" />
+          <Property Name="ConProducto" Type="Int64" Nullable="false" />
+          <Property Name="Cantidad" Type="Int32" Nullable="false" />
+          <Property Name="FechaCarrito" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="CATEGORIA">
+          <Key>
+            <PropertyRef Name="ConCategoria" />
+          </Key>
+          <Property Name="ConCategoria" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__PRODUCTO__ConCat__5165187F" FromRole="CATEGORIA" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="DETALLE">
+          <Key>
+            <PropertyRef Name="ConDetalle" />
+          </Key>
+          <Property Name="ConDetalle" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConMaestro" Type="Int64" Nullable="false" />
+          <Property Name="ConProducto" Type="Int64" Nullable="false" />
+          <Property Name="CantidadCompra" Type="Int32" Nullable="false" />
+          <Property Name="PrecioCompra" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Impuesto" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MAESTRO">
+          <Key>
+            <PropertyRef Name="ConMaestro" />
+          </Key>
+          <Property Name="ConMaestro" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConUsuario" Type="Int64" Nullable="false" />
+          <Property Name="TotalFactura" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="FechaCompra" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK_MAESTRO_USUARIO" FromRole="MAESTRO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="MARCA">
+          <Key>
+            <PropertyRef Name="ConMarca" />
+          </Key>
+          <Property Name="ConMarca" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__PRODUCTO__ConMar__5070F446" FromRole="MARCA" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="MODELO">
+          <Key>
+            <PropertyRef Name="ConModelo" />
+          </Key>
+          <Property Name="ConModelo" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="PRODUCTO" Relationship="Self.FK__PRODUCTO__ConMod__4F7CD00D" FromRole="MODELO" ToRole="PRODUCTO" />
+        </EntityType>
+        <EntityType Name="PRODUCTO">
+          <Key>
+            <PropertyRef Name="ConProducto" />
+          </Key>
+          <Property Name="ConProducto" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConModelo" Type="Int64" />
+          <Property Name="ConMarca" Type="Int64" />
+          <Property Name="ConCategoria" Type="Int64" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="Stock" Type="Int64" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Imagen" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CATEGORIA" Relationship="Self.FK__PRODUCTO__ConCat__5165187F" FromRole="PRODUCTO" ToRole="CATEGORIA" />
+          <NavigationProperty Name="MARCA" Relationship="Self.FK__PRODUCTO__ConMar__5070F446" FromRole="PRODUCTO" ToRole="MARCA" />
+          <NavigationProperty Name="MODELO" Relationship="Self.FK__PRODUCTO__ConMod__4F7CD00D" FromRole="PRODUCTO" ToRole="MODELO" />
+        </EntityType>
+        <EntityType Name="PROVINCIA">
+          <Key>
+            <PropertyRef Name="ConProvincia" />
+          </Key>
+          <Property Name="ConProvincia" Type="Int64" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="45" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CANTON" Relationship="Self.FK__CANTON__IdProvin__3B75D760" FromRole="PROVINCIA" ToRole="CANTON" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__USUARIO__ConProv__3F466844" FromRole="PROVINCIA" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="Rol">
+          <Key>
+            <PropertyRef Name="ConRol" />
+          </Key>
+          <Property Name="ConRol" Type="Int64" Nullable="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USUARIO" Relationship="Self.FK__USUARIO__ConRol__3E52440B" FromRole="Rol" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ConUsuario" />
+          </Key>
+          <Property Name="ConUsuario" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Identificacion" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Contrasenna" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ConRol" Type="Int64" />
+          <Property Name="ConProvincia" Type="Int64" />
+          <Property Name="ConCanton" Type="Int64" />
+          <Property Name="Imagen" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="CANTON" Relationship="Self.FK__USUARIO__ConCant__403A8C7D" FromRole="USUARIO" ToRole="CANTON" />
+          <NavigationProperty Name="MAESTRO" Relationship="Self.FK_MAESTRO_USUARIO" FromRole="USUARIO" ToRole="MAESTRO" />
+          <NavigationProperty Name="PROVINCIA" Relationship="Self.FK__USUARIO__ConProv__3F466844" FromRole="USUARIO" ToRole="PROVINCIA" />
+          <NavigationProperty Name="Rol" Relationship="Self.FK__USUARIO__ConRol__3E52440B" FromRole="USUARIO" ToRole="Rol" />
+        </EntityType>
+        <Association Name="FK__CANTON__IdProvin__3B75D760">
+          <End Role="PROVINCIA" Type="Self.PROVINCIA" Multiplicity="0..1" />
+          <End Role="CANTON" Type="Self.CANTON" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVINCIA">
+              <PropertyRef Name="ConProvincia" />
+            </Principal>
+            <Dependent Role="CANTON">
+              <PropertyRef Name="IdProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ConCant__403A8C7D">
+          <End Role="CANTON" Type="Self.CANTON" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CANTON">
+              <PropertyRef Name="ConCanton" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ConCanton" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__ConCat__5165187F">
+          <End Role="CATEGORIA" Type="Self.CATEGORIA" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA">
+              <PropertyRef Name="ConCategoria" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ConCategoria" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MAESTRO_USUARIO">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="MAESTRO" Type="Self.MAESTRO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ConUsuario" />
+            </Principal>
+            <Dependent Role="MAESTRO">
+              <PropertyRef Name="ConUsuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__ConMar__5070F446">
+          <End Role="MARCA" Type="Self.MARCA" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MARCA">
+              <PropertyRef Name="ConMarca" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ConMarca" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PRODUCTO__ConMod__4F7CD00D">
+          <End Role="MODELO" Type="Self.MODELO" Multiplicity="0..1" />
+          <End Role="PRODUCTO" Type="Self.PRODUCTO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MODELO">
+              <PropertyRef Name="ConModelo" />
+            </Principal>
+            <Dependent Role="PRODUCTO">
+              <PropertyRef Name="ConModelo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ConProv__3F466844">
+          <End Role="PROVINCIA" Type="Self.PROVINCIA" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROVINCIA">
+              <PropertyRef Name="ConProvincia" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ConProvincia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ConRol__3E52440B">
+          <End Role="Rol" Type="Self.Rol" Multiplicity="0..1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rol">
+              <PropertyRef Name="ConRol" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ConRol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ProyectoG7Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CANTON" EntityType="Self.CANTON" />
+          <EntitySet Name="CARRITO" EntityType="Self.CARRITO" />
+          <EntitySet Name="CATEGORIA" EntityType="Self.CATEGORIA" />
+          <EntitySet Name="DETALLE" EntityType="Self.DETALLE" />
+          <EntitySet Name="MAESTRO" EntityType="Self.MAESTRO" />
+          <EntitySet Name="MARCA" EntityType="Self.MARCA" />
+          <EntitySet Name="MODELO" EntityType="Self.MODELO" />
+          <EntitySet Name="PRODUCTO" EntityType="Self.PRODUCTO" />
+          <EntitySet Name="PROVINCIA" EntityType="Self.PROVINCIA" />
+          <EntitySet Name="Rol" EntityType="Self.Rol" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" />
+          <AssociationSet Name="FK__CANTON__IdProvin__3B75D760" Association="Self.FK__CANTON__IdProvin__3B75D760">
+            <End Role="PROVINCIA" EntitySet="PROVINCIA" />
+            <End Role="CANTON" EntitySet="CANTON" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ConCant__403A8C7D" Association="Self.FK__USUARIO__ConCant__403A8C7D">
+            <End Role="CANTON" EntitySet="CANTON" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__ConCat__5165187F" Association="Self.FK__PRODUCTO__ConCat__5165187F">
+            <End Role="CATEGORIA" EntitySet="CATEGORIA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MAESTRO_USUARIO" Association="Self.FK_MAESTRO_USUARIO">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="MAESTRO" EntitySet="MAESTRO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__ConMar__5070F446" Association="Self.FK__PRODUCTO__ConMar__5070F446">
+            <End Role="MARCA" EntitySet="MARCA" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PRODUCTO__ConMod__4F7CD00D" Association="Self.FK__PRODUCTO__ConMod__4F7CD00D">
+            <End Role="MODELO" EntitySet="MODELO" />
+            <End Role="PRODUCTO" EntitySet="PRODUCTO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ConProv__3F466844" Association="Self.FK__USUARIO__ConProv__3F466844">
+            <End Role="PROVINCIA" EntitySet="PROVINCIA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ConRol__3E52440B" Association="Self.FK__USUARIO__ConRol__3E52440B">
+            <End Role="Rol" EntitySet="Rol" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <FunctionImport Name="ConsultarProductos" ReturnType="Collection(ProyectoG7Model.ConsultarProductos_Result)" />
+          <FunctionImport Name="IniciarSesion" ReturnType="Collection(ProyectoG7Model.IniciarSesion_Result)">
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Contrasenna" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="PagarCarrito_SP">
+            <Parameter Name="ConUsuario" Mode="In" Type="Int64" />
+          </FunctionImport>
+          <FunctionImport Name="RegistrarCuenta">
+            <Parameter Name="Cedula" Mode="In" Type="String" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+            <Parameter Name="Correo" Mode="In" Type="String" />
+            <Parameter Name="Contrasenna" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ConsultarProductos_Result">
+          <Property Type="Int64" Name="ConProducto" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="DescripcionModelo" Nullable="false" />
+          <Property Type="String" Name="DescripcionMarca" Nullable="false" />
+          <Property Type="String" Name="DescripcionCategoria" Nullable="false" />
+          <Property Type="Decimal" Name="Precio" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int64" Name="Stock" Nullable="false" />
+          <Property Type="String" Name="Imagen" Nullable="false" MaxLength="250" />
+        </ComplexType>
+        <ComplexType Name="IniciarSesion_Result">
+          <Property Type="Int64" Name="ConUsuario" Nullable="false" />
+          <Property Type="String" Name="Identificacion" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Correo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Contrasenna" Nullable="false" MaxLength="150" />
+          <Property Type="String" Name="Imagen" Nullable="false" MaxLength="250" />
+          <Property Type="String" Name="DescripcionRol" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DescripcionProvincia" Nullable="false" MaxLength="45" />
+          <Property Type="String" Name="DescripcionCanton" Nullable="false" MaxLength="35" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ProyectoG7ModelStoreContainer" CdmEntityContainer="ProyectoG7Entities">
+          <EntitySetMapping Name="CANTON">
+            <EntityTypeMapping TypeName="ProyectoG7Model.CANTON">
+              <MappingFragment StoreEntitySet="CANTON">
+                <ScalarProperty Name="ConCanton" ColumnName="ConCanton" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="IdProvincia" ColumnName="IdProvincia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CARRITO">
+            <EntityTypeMapping TypeName="ProyectoG7Model.CARRITO">
+              <MappingFragment StoreEntitySet="CARRITO">
+                <ScalarProperty Name="ConCarrito" ColumnName="ConCarrito" />
+                <ScalarProperty Name="ConUsuario" ColumnName="ConUsuario" />
+                <ScalarProperty Name="ConProducto" ColumnName="ConProducto" />
+                <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+                <ScalarProperty Name="FechaCarrito" ColumnName="FechaCarrito" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORIA">
+            <EntityTypeMapping TypeName="ProyectoG7Model.CATEGORIA">
+              <MappingFragment StoreEntitySet="CATEGORIA">
+                <ScalarProperty Name="ConCategoria" ColumnName="ConCategoria" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DETALLE">
+            <EntityTypeMapping TypeName="ProyectoG7Model.DETALLE">
+              <MappingFragment StoreEntitySet="DETALLE">
+                <ScalarProperty Name="ConDetalle" ColumnName="ConDetalle" />
+                <ScalarProperty Name="ConMaestro" ColumnName="ConMaestro" />
+                <ScalarProperty Name="ConProducto" ColumnName="ConProducto" />
+                <ScalarProperty Name="CantidadCompra" ColumnName="CantidadCompra" />
+                <ScalarProperty Name="PrecioCompra" ColumnName="PrecioCompra" />
+                <ScalarProperty Name="Impuesto" ColumnName="Impuesto" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MAESTRO">
+            <EntityTypeMapping TypeName="ProyectoG7Model.MAESTRO">
+              <MappingFragment StoreEntitySet="MAESTRO">
+                <ScalarProperty Name="ConMaestro" ColumnName="ConMaestro" />
+                <ScalarProperty Name="ConUsuario" ColumnName="ConUsuario" />
+                <ScalarProperty Name="TotalFactura" ColumnName="TotalFactura" />
+                <ScalarProperty Name="FechaCompra" ColumnName="FechaCompra" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MARCA">
+            <EntityTypeMapping TypeName="ProyectoG7Model.MARCA">
+              <MappingFragment StoreEntitySet="MARCA">
+                <ScalarProperty Name="ConMarca" ColumnName="ConMarca" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MODELO">
+            <EntityTypeMapping TypeName="ProyectoG7Model.MODELO">
+              <MappingFragment StoreEntitySet="MODELO">
+                <ScalarProperty Name="ConModelo" ColumnName="ConModelo" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PRODUCTO">
+            <EntityTypeMapping TypeName="ProyectoG7Model.PRODUCTO">
+              <MappingFragment StoreEntitySet="PRODUCTO">
+                <ScalarProperty Name="ConProducto" ColumnName="ConProducto" />
+                <ScalarProperty Name="ConModelo" ColumnName="ConModelo" />
+                <ScalarProperty Name="ConMarca" ColumnName="ConMarca" />
+                <ScalarProperty Name="ConCategoria" ColumnName="ConCategoria" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROVINCIA">
+            <EntityTypeMapping TypeName="ProyectoG7Model.PROVINCIA">
+              <MappingFragment StoreEntitySet="PROVINCIA">
+                <ScalarProperty Name="ConProvincia" ColumnName="ConProvincia" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rol">
+            <EntityTypeMapping TypeName="ProyectoG7Model.Rol">
+              <MappingFragment StoreEntitySet="Rol">
+                <ScalarProperty Name="ConRol" ColumnName="ConRol" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="ProyectoG7Model.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="ConUsuario" ColumnName="ConUsuario" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+                <ScalarProperty Name="ConRol" ColumnName="ConRol" />
+                <ScalarProperty Name="ConProvincia" ColumnName="ConProvincia" />
+                <ScalarProperty Name="ConCanton" ColumnName="ConCanton" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ConsultarProductos" FunctionName="ProyectoG7Model.Store.ConsultarProductos">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoG7Model.ConsultarProductos_Result">
+                <ScalarProperty Name="ConProducto" ColumnName="ConProducto" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="DescripcionModelo" ColumnName="DescripcionModelo" />
+                <ScalarProperty Name="DescripcionMarca" ColumnName="DescripcionMarca" />
+                <ScalarProperty Name="DescripcionCategoria" ColumnName="DescripcionCategoria" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="Stock" ColumnName="Stock" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="IniciarSesion" FunctionName="ProyectoG7Model.Store.IniciarSesion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ProyectoG7Model.IniciarSesion_Result">
+                <ScalarProperty Name="ConUsuario" ColumnName="ConUsuario" />
+                <ScalarProperty Name="Identificacion" ColumnName="Identificacion" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Correo" ColumnName="Correo" />
+                <ScalarProperty Name="Contrasenna" ColumnName="Contrasenna" />
+                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="DescripcionRol" ColumnName="DescripcionRol" />
+                <ScalarProperty Name="DescripcionProvincia" ColumnName="DescripcionProvincia" />
+                <ScalarProperty Name="DescripcionCanton" ColumnName="DescripcionCanton" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="PagarCarrito_SP" FunctionName="ProyectoG7Model.Store.PagarCarrito_SP" />
+          <FunctionImportMapping FunctionImportName="RegistrarCuenta" FunctionName="ProyectoG7Model.Store.RegistrarCuenta" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,440 @@
+CREATE TABLE Rol (
+    ConRol BIGINT PRIMARY KEY,
+    Descripcion VARCHAR(100)
+)
+GO
+
+CREATE TABLE PROVINCIA(
+	ConProvincia BIGINT PRIMARY KEY,
+	Nombre VARCHAR(45) NOT NULL,
+)
+GO
+
+CREATE TABLE CANTON(
+	ConCanton BIGINT PRIMARY KEY,
+	Nombre VARCHAR(35) NOT NULL,
+	IdProvincia BIGINT REFERENCES  PROVINCIA(ConProvincia)
+)
+GO
+
+CREATE TABLE USUARIO(
+	ConUsuario BIGINT PRIMARY KEY IDENTITY,
+	Identificacion VARCHAR(20) NOT NULL,
+	Nombre VARCHAR(100) NOT NULL,
+	Correo VARCHAR(100) NOT NULL,
+	Contrasenna VARCHAR(150) NOT NULL,
+	ConRol BIGINT FOREIGN KEY REFERENCES Rol(ConRol),
+	ConProvincia BIGINT FOREIGN KEY REFERENCES PROVINCIA(ConProvincia),
+	ConCanton BIGINT FOREIGN KEY REFERENCES CANTON(ConCanton)
+)
+GO
+
+INSERT INTO Rol (ConRol, Descripcion) VALUES (1, 'USUARIO');
+INSERT INTO Rol (ConRol, Descripcion) VALUES (2, 'ADMIN');
+
+INSERT INTO Provincia (ConProvincia, Nombre) VALUES (1, 'San José');
+INSERT INTO Provincia (ConProvincia, Nombre) VALUES (2, 'Alajuela');
+INSERT INTO Provincia (ConProvincia, Nombre) VALUES (3, 'Cartago');
+INSERT INTO Provincia (ConProvincia, Nombre) VALUES (4, 'Heredia');
+INSERT INTO Provincia (ConProvincia, Nombre) VALUES (5, 'Guanacaste');
+INSERT INTO Provincia (ConProvincia, Nombre) VALUES (6, 'Puntarenas');
+INSERT INTO Provincia (ConProvincia, Nombre) VALUES (7, 'Limón');
+INSERT INTO Provincia (ConProvincia, Nombre) VALUES (8, 'Seleccione');
+
+
+
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (100, 'San José', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (101, 'Escazú', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (102, 'Desamparados', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (103, 'Puriscal', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (104, 'Tarrazú', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (105, 'Aserrí', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (106, 'Mora', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (107, 'Goicoechea', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (108, 'Santa Ana', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (109, 'Alajuelita', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (110, 'Vázquez de Coronado', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (111, 'Acosta', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (112, 'Tibás', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (113, 'Moravia', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (114, 'Montes de Oca', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (115, 'Turrubares', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (116, 'Dota', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (117, 'Curridabat', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (118, 'Pérez Zeledón', 1);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (119, 'León Cortés Castro', 1);
+
+
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (200, 'Alajuela', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (201, 'San Ramón', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (202, 'Grecia', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (203, 'San Mateo', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (204, 'Atenas', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (205, 'Naranjo', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (206, 'Palmares', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (207, 'Poás', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (208, 'Orotina', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (209, 'San Carlos', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (210, 'Zarcero', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (211, 'Sarchí', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (212, 'Upala', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (213, 'Los Chiles', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (214, 'Guatuso', 2);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (215, 'Río Cuarto', 2);
+
+
+
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (300, 'Cartago', 3);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (301, 'Paraíso', 3);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (302, 'La Unión', 3);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (303, 'Jiménez', 3);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (304, 'Turrialba', 3);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (305, 'Alvarado', 3);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (306, 'Oreamuno', 3);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (307, 'El Guarco', 3);
+
+
+
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (400, 'Heredia', 4);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (401, 'Barva', 4);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (402, 'Santo Domingo', 4);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (403, 'Santa Bárbara', 4);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (404, 'San Rafael', 4);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (405, 'San Isidro', 4);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (406, 'Belén', 4);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (407, 'Flores', 4);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (408, 'San Pablo', 4);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (409, 'Sarapiquí', 4);
+
+
+
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (500, 'Liberia', 5);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (501, 'Nicoya', 5);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (502, 'Santa Cruz', 5);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (503, 'Bagaces', 5);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (504, 'Carillo', 5);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (505, 'Cañas', 5);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (506, 'Abangares', 5);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (507, 'Tilarán', 5);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (508, 'Nandayure', 5);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (509, 'La Cruz', 5);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (510, 'Hojancha', 5);
+
+
+
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (600, 'Puntarenas', 6);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (601, 'Esparza', 6);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (602, 'Buenos Aires', 6);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (603, 'Montes de Oro', 6);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (604, 'Osa', 6);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (605, 'Quepos', 6);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (606, 'Golfito', 6);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (607, 'Coto Brus', 6);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (608, 'Parrita', 6);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (609, 'Corredores', 6);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (610, 'Garabito', 6);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (611, 'Monteverde', 6);
+
+
+
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (700, 'Limón', 7);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (701, 'Pococí', 7);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (702, 'Siquirres', 7);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (703, 'Talamanca', 7);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (704, 'Matina', 7);
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (705, 'Guácimo', 7);
+
+
+INSERT INTO Canton (ConCanton, Nombre, IdProvincia) VALUES (800, 'Seleccione', 8);
+
+
+
+
+INSERT INTO USUARIO (Identificacion, Nombre, Correo, Contrasenna, ConRol, ConProvincia, ConCanton)
+VALUES ('123', 'admin', 'admin@admin.com', '123', 2, 3, 302);
+
+
+USE ProyectoG7;
+GO
+CREATE PROCEDURE RegistrarCuenta
+    @Cedula VARCHAR(20),
+    @Nombre VARCHAR(100),
+    @Correo VARCHAR(100),
+    @Contrasenna VARCHAR(150)
+AS
+BEGIN
+    INSERT INTO USUARIO (Identificacion, Nombre, Correo, Contrasenna, ConRol, ConProvincia, ConCanton)
+    VALUES (@Cedula, @Nombre, @Correo, @Contrasenna, 1, 8, 800);
+END;
+GO
+
+
+
+USE ProyectoG7
+GO
+CREATE PROCEDURE IniciarSesion
+	@Correo varchar(100),
+	@Contrasenna varchar(20)
+AS
+BEGIN
+	SELECT ConUsuario, Identificacion, U.Nombre, Correo, Contrasenna, R.Descripcion 'DescripcionRol', P.Nombre 'DescripcionProvincia', C.Nombre 'DescripcionCanton'
+	FROM USUARIO U
+	INNER JOIN Rol R ON U.ConRol = R.ConRol
+	INNER JOIN PROVINCIA P ON U.ConProvincia = P.ConProvincia
+	INNER JOIN CANTON C ON U.ConCanton = C.ConCanton
+	WHERE Correo = @Correo
+	AND Contrasenna = @Contrasenna
+END
+
+
+
+CREATE TABLE CATEGORIA (
+    ConCategoria BIGINT PRIMARY KEY IDENTITY(1,1),
+    Descripcion NVARCHAR(MAX) NOT NULL
+);
+
+
+CREATE TABLE MODELO (
+    ConModelo BIGINT PRIMARY KEY IDENTITY(1,1),
+    Descripcion NVARCHAR(MAX) NOT NULL
+);
+
+
+CREATE TABLE MARCA (
+    ConMarca BIGINT PRIMARY KEY IDENTITY(1,1),
+    Descripcion NVARCHAR(MAX) NOT NULL
+);
+
+
+CREATE TABLE PRODUCTO (
+    ConProducto BIGINT PRIMARY KEY IDENTITY(1,1),
+    Nombre VARCHAR(100) NOT NULL,
+    ConModelo BIGINT FOREIGN KEY REFERENCES MODELO(ConModelo),
+    ConMarca BIGINT FOREIGN KEY REFERENCES MARCA(ConMarca),
+    ConCategoria BIGINT FOREIGN KEY REFERENCES CATEGORIA(ConCategoria),
+    Precio DECIMAL(18, 2) NOT NULL,
+    Stock BIGINT NOT NULL
+);
+
+-- Agrega una columna llamada [Imagen] a la tabla PRODUCTO
+ALTER TABLE PRODUCTO
+ADD [Imagen] [varchar](250) NOT NULL DEFAULT '~/Images/Productos/default.jpg';
+
+USE [ProyectoG7]
+GO
+/****** Object:  StoredProcedure [dbo].[ConsultarProductos]    Script Date: 5/12/2023 22:56:16 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ALTER PROCEDURE [dbo].[ConsultarProductos]
+AS
+BEGIN
+	SELECT ConProducto, Nombre, m.Descripcion 'DescripcionModelo', a.Descripcion 'DescripcionMarca', c.Descripcion 'DescripcionCategoria', Precio, Stock, Imagen
+	FROM PRODUCTO P
+	INNER JOIN MODELO m ON P.ConModelo = m.ConModelo
+	INNER JOIN MARCA a ON P.ConMarca = a.ConMarca
+	INNER JOIN CATEGORIA c ON P.ConCategoria = c.ConCategoria
+END
+
+DELETE FROM PRODUCTO;
+DELETE FROM CATEGORIA;
+DELETE FROM MARCA;
+DELETE FROM MODELO;
+
+DBCC CHECKIDENT('PRODUCTO', RESEED, 0);
+DBCC CHECKIDENT('CATEGORIA', RESEED, 0);
+DBCC CHECKIDENT('MODELO', RESEED, 0);
+DBCC CHECKIDENT('MARCA', RESEED, 0);
+
+INSERT INTO MARCA (Descripcion) VALUES
+('Volkswagen'),
+('Audi'),
+('Lamborghini');
+
+INSERT INTO CATEGORIA (Descripcion) VALUES
+('Compacto'),
+('Deportivo'),
+('Sedán'),
+('SUV'),
+('Type 1');
+
+INSERT INTO MODELO (Descripcion) VALUES
+('Golf GTI'),
+('Jetta'),
+('A3'),
+('A4'),
+('Huracan'),
+('Aventador'),
+('Type 1');
+
+-- Volkswagen
+INSERT INTO PRODUCTO (ConModelo, ConMarca, ConCategoria, Precio, Nombre, Imagen, Stock)
+VALUES
+(7, 1, 5, 12000.00, '1965', '~/Images/Productos/16.jpg', 30),
+(7, 1, 5, 15000.00, '1970', '~/Images/Productos/17.jpg', 20),
+(1, 1, 1, 30000.00, '2010', '~/Images/Productos/1.jpg', 50),
+(2, 1, 3, 25000.00, '2015', '~/Images/Productos/2.jpg', 50),
+(1, 1, 2, 35000.00, '2012', '~/Images/Productos/3.jpg', 50),
+-- Audi
+(3, 2, 1, 40000.00, '2018', '~/Images/Productos/4.jpg', 50),
+(4, 2, 3, 32000.00, '2016', '~/Images/Productos/5.jpg', 50),
+-- Lamborghini
+(5, 3, 2, 50000.00, '2020', '~/Images/Productos/6.jpg', 50),
+(6, 3, 1, 60000.00, '2019', '~/Images/Productos/7.jpg', 50),
+-- Otros
+(2, 1, 4, 28000.00, '2014', '~/Images/Productos/8.jpg', 50),
+(3, 2, 2, 45000.00, '2017', '~/Images/Productos/9.jpg', 50),
+(6, 3, 3, 55000.00, '2022', '~/Images/Productos/10.jpg', 50),
+(4, 2, 4, 34000.00, '2013', '~/Images/Productos/11.jpg', 50),
+(5, 3, 1, 48000.00, '2016', '~/Images/Productos/12.jpg', 50),
+(1, 1, 3, 32000.00, '2011', '~/Images/Productos/13.jpg', 50),
+(2, 1, 2, 38000.00, '2013', '~/Images/Productos/14.jpg', 50),
+(3, 2, 1, 42000.00, '2015', '~/Images/Productos/15.jpg', 50);
+
+USE [ProyectoG7]
+GO
+/****** Object:  Table [dbo].[CARRITO]    Script Date: 8 dic. 2023 03:06:11 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CARRITO](
+    [ConCarrito] [bigint] IDENTITY(1,1) NOT NULL,
+    [ConUsuario] [bigint] NOT NULL,
+    [ConProducto] [bigint] NOT NULL,
+    [Cantidad] [int] NOT NULL,
+    [FechaCarrito] [datetime] NOT NULL,
+ CONSTRAINT [PK_CARRITO] PRIMARY KEY CLUSTERED 
+(
+    [ConCarrito] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+/****** Object:  Table [dbo].[DETALLE]    Script Date: 8 dic. 2023 03:06:11 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[DETALLE](
+	[ConDetalle] [bigint] IDENTITY(1,1) NOT NULL,
+	[ConMaestro] [bigint] NOT NULL,
+	[ConProducto] [bigint] NOT NULL,
+	[CantidadCompra] [int] NOT NULL,
+	[PrecioCompra] [decimal](18, 2) NOT NULL,
+	[Impuesto] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_DETALLE] PRIMARY KEY CLUSTERED 
+(
+	[ConDetalle] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[MAESTRO]    Script Date: 8 dic. 2023 03:06:11 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[MAESTRO](
+	[ConMaestro] [bigint] IDENTITY(1,1) NOT NULL,
+	[ConUsuario] [bigint] NOT NULL,
+	[TotalFactura] [decimal](18, 2) NOT NULL,
+	[FechaCompra] [datetime] NOT NULL,
+ CONSTRAINT [PK_MAESTRO] PRIMARY KEY CLUSTERED 
+(
+	[ConMaestro] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[CARRITO]  WITH CHECK ADD  CONSTRAINT [FK_CARRITO_CARRITO] FOREIGN KEY([ConUsuario])
+REFERENCES [dbo].[USUARIO] ([ConUsuario])
+GO
+ALTER TABLE [dbo].[CARRITO] CHECK CONSTRAINT [FK_CARRITO_CARRITO]
+GO
+ALTER TABLE [dbo].[CARRITO]  WITH CHECK ADD  CONSTRAINT [FK_CARRITO_PRODUCTO] FOREIGN KEY([ConProducto])
+REFERENCES [dbo].[PRODUCTO] ([ConProducto])
+GO
+ALTER TABLE [dbo].[CARRITO] CHECK CONSTRAINT [FK_CARRITO_PRODUCTO]
+GO
+ALTER TABLE [dbo].[DETALLE]  WITH CHECK ADD  CONSTRAINT [FK_DETALLE_MAESTRO] FOREIGN KEY([ConMaestro])
+REFERENCES [dbo].[MAESTRO] ([ConMaestro])
+GO
+ALTER TABLE [dbo].[DETALLE] CHECK CONSTRAINT [FK_DETALLE_MAESTRO]
+GO
+ALTER TABLE [dbo].[DETALLE]  WITH CHECK ADD  CONSTRAINT [FK_DETALLE_PRODUCTO] FOREIGN KEY([ConProducto])
+REFERENCES [dbo].[PRODUCTO] ([ConProducto])
+GO
+ALTER TABLE [dbo].[DETALLE] CHECK CONSTRAINT [FK_DETALLE_PRODUCTO]
+GO
+ALTER TABLE [dbo].[MAESTRO]  WITH CHECK ADD  CONSTRAINT [FK_MAESTRO_USUARIO] FOREIGN KEY([ConUsuario])
+REFERENCES [dbo].[USUARIO] ([ConUsuario])
+GO
+ALTER TABLE [dbo].[MAESTRO] CHECK CONSTRAINT [FK_MAESTRO_USUARIO]
+GO
+
+
+-- Agrega una columna llamada [Imagen] a la tabla USUARIO
+ALTER TABLE USUARIO
+ADD [Imagen] [varchar](250) NOT NULL DEFAULT '~/Images/Users/default.jpg';
+
+ALTER PROCEDURE [dbo].[IniciarSesion]
+	@Correo varchar(100),
+	@Contrasenna varchar(20)
+AS
+BEGIN
+	SELECT ConUsuario, Identificacion, U.Nombre, Correo, Contrasenna, U.Imagen, R.Descripcion 'DescripcionRol', P.Nombre 'DescripcionProvincia', C.Nombre 'DescripcionCanton'
+	FROM USUARIO U
+	INNER JOIN Rol R ON U.ConRol = R.ConRol
+	INNER JOIN PROVINCIA P ON U.ConProvincia = P.ConProvincia
+	INNER JOIN CANTON C ON U.ConCanton = C.ConCanton
+	WHERE Correo = @Correo
+	AND Contrasenna = @Contrasenna
+END
+
+CREATE PROCEDURE PagarCarrito_SP
+    @ConUsuario BIGINT
+AS
+BEGIN
+    DECLARE @TotalFactura AS DECIMAL(18, 2);
+    DECLARE @CodigoMaestro AS BIGINT;
+
+    SELECT @TotalFactura = SUM(P.Precio * C.Cantidad) + SUM(P.Precio * C.Cantidad) * 0.13
+    FROM CARRITO C
+    INNER JOIN PRODUCTO P ON C.ConProducto = P.ConProducto
+    WHERE ConUsuario = @ConUsuario;
+
+    INSERT INTO dbo.MAESTRO(ConUsuario, TotalFactura, FechaCompra)
+    VALUES(@ConUsuario, @TotalFactura, GETDATE());
+
+    SET @CodigoMaestro = @@IDENTITY;
+
+    INSERT INTO dbo.DETALLE(ConMaestro, ConProducto, CantidadCompra, PrecioCompra, Impuesto)
+    SELECT @CodigoMaestro, C.ConProducto, C.Cantidad, P.Precio, (C.Cantidad * P.Precio) * 0.13
+    FROM CARRITO C
+    INNER JOIN PRODUCTO P ON C.ConProducto = P.ConProducto
+    WHERE @ConUsuario = @ConUsuario;
+
+    UPDATE P
+    SET P.Stock -= C.Cantidad
+    FROM PRODUCTO P
+    INNER JOIN CARRITO C ON C.ConProducto = P.ConProducto
+    WHERE ConUsuario = @ConUsuario;
+
+    DELETE FROM dbo.CARRITO
+    WHERE ConUsuario = @ConUsuario;
+END
+GO
+
+
+CREATE TABLE [dbo].[DETALLE](
+	[ConDetalle] [bigint] IDENTITY(1,1) NOT NULL,
+	[ConMaestro] [bigint] NOT NULL,
+	[ConProducto] [bigint] NOT NULL,
+	[CantidadCompra] [int] NOT NULL,
+	[PrecioCompra] [decimal](18, 2) NOT NULL,
+ CONSTRAINT [PK_DETALLE] PRIMARY KEY CLUSTERED 
+(
+	[ConDetalle] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
+
