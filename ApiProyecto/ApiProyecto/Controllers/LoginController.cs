@@ -57,7 +57,7 @@ namespace ApiProyecto.Controllers
             {
                 using (var context = new ProyectoG7Entities())
                 {
-                    var datos = (from x in context.USUARIO
+                    var datos = (from x in context.USUARIOs
                                  where x.Identificacion == ent.Identificacion
                                  select x).FirstOrDefault();
 

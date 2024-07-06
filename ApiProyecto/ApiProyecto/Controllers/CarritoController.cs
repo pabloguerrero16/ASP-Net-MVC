@@ -17,14 +17,14 @@ namespace ApiProyecto.Controllers
             using (var context = new ProyectoG7Entities())
             {
 
-                var datos = (from x in context.CARRITO
+                var datos = (from x in context.CARRITOes
                              where x.ConUsuario == carrito.ConUsuario
                              && x.ConProducto == carrito.ConProducto
                              select x).FirstOrDefault();
 
                 if (datos == null)
                 {
-                    context.CARRITO.Add(carrito);
+                    context.CARRITOes.Add(carrito);
                     context.SaveChanges();
 
                 }
@@ -45,10 +45,10 @@ namespace ApiProyecto.Controllers
             using (var context = new ProyectoG7Entities())
             {
                 context.Configuration.LazyLoadingEnabled = false;
-                return (from x in context.CARRITO
-                        join y in context.PRODUCTO on x.ConProducto equals y.ConProducto
-                        join m in context.MODELO on y.ConModelo equals m.ConModelo
-                        join ma in context.MARCA on y.ConMarca equals ma.ConMarca
+                return (from x in context.CARRITOes
+                        join y in context.PRODUCTOes on x.ConProducto equals y.ConProducto
+                        join m in context.MODELOes on y.ConModelo equals m.ConModelo
+                        join ma in context.MARCAs on y.ConMarca equals ma.ConMarca
                         where x.ConUsuario == q
                         select new
                         {
@@ -87,11 +87,11 @@ namespace ApiProyecto.Controllers
             using (var context = new ProyectoG7Entities())
 
             {
-                var datos = (from x in context.CARRITO
+                var datos = (from x in context.CARRITOes
                              where x.ConCarrito == q
                              select x).FirstOrDefault();
 
-                context.CARRITO.Remove(datos);
+                context.CARRITOes.Remove(datos);
                 context.SaveChanges();
             }
         }
@@ -103,7 +103,7 @@ namespace ApiProyecto.Controllers
             using (var context = new ProyectoG7Entities())
             {
                 context.Configuration.LazyLoadingEnabled = false;
-                return (from x in context.MAESTRO
+                return (from x in context.MAESTROes
                         where x.ConUsuario == q
                         select x).ToList();
             }
@@ -116,10 +116,10 @@ namespace ApiProyecto.Controllers
             using (var context = new ProyectoG7Entities())
             {
                 context.Configuration.LazyLoadingEnabled = false;
-                return (from x in context.DETALLE
-                        join y in context.PRODUCTO on x.ConProducto equals y.ConProducto
-                        join m in context.MODELO on y.ConModelo equals m.ConModelo
-                        join ma in context.MARCA on y.ConMarca equals ma.ConMarca
+                return (from x in context.DETALLEs
+                        join y in context.PRODUCTOes on x.ConProducto equals y.ConProducto
+                        join m in context.MODELOes on y.ConModelo equals m.ConModelo
+                        join ma in context.MARCAs on y.ConMarca equals ma.ConMarca
                         where x.ConMaestro == q
                         select new
                         {

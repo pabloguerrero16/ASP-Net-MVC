@@ -32,7 +32,7 @@ namespace ApiProyecto.Controllers
                 using (var context = new ProyectoG7Entities())
                 {
                     context.Configuration.LazyLoadingEnabled = false;
-                    var datos = (from x in context.PRODUCTO
+                    var datos = (from x in context.PRODUCTOes
                                  where x.ConProducto == q
                                  select new ProductoEnt
                                  {
@@ -64,7 +64,7 @@ namespace ApiProyecto.Controllers
             try
             {
                 using (var context = new ProyectoG7Entities()){
-                    var datos = (from x in context.MODELO
+                    var datos = (from x in context.MODELOes
                                  select x).ToList();
 
                     var respuesta = new List<System.Web.Mvc.SelectListItem>();
@@ -88,7 +88,7 @@ namespace ApiProyecto.Controllers
             {
                 using (var context = new ProyectoG7Entities())
                 {
-                    var datos = (from x in context.CATEGORIA
+                    var datos = (from x in context.CATEGORIAs
                                  select x).ToList();
 
                     var respuesta = new List<System.Web.Mvc.SelectListItem>();
@@ -113,7 +113,7 @@ namespace ApiProyecto.Controllers
             {
                 using (var context = new ProyectoG7Entities())
                 {
-                    var datos = (from x in context.MARCA
+                    var datos = (from x in context.MARCAs
                                  select x).ToList();
 
                     var respuesta = new List<System.Web.Mvc.SelectListItem>();
@@ -138,7 +138,7 @@ namespace ApiProyecto.Controllers
             {
                 context.Configuration.LazyLoadingEnabled = false;
 
-                var productos = context.PRODUCTO
+                var productos = context.PRODUCTOes
                     .Include(p => p.MODELO)
                     .Include(p => p.MARCA)
                     .Include(p => p.CATEGORIA)
@@ -171,7 +171,7 @@ namespace ApiProyecto.Controllers
             {
                 context.Configuration.LazyLoadingEnabled = false;
 
-                var productos = context.PRODUCTO
+                var productos = context.PRODUCTOes
                     .Include(p => p.MODELO)
                     .Include(p => p.MARCA)
                     .Include(p => p.CATEGORIA)
@@ -204,7 +204,7 @@ namespace ApiProyecto.Controllers
             {
                 context.Configuration.LazyLoadingEnabled = false;
 
-                var productos = context.PRODUCTO
+                var productos = context.PRODUCTOes
                     .Include(p => p.MODELO)
                     .Include(p => p.MARCA)
                     .Include(p => p.CATEGORIA)
@@ -235,7 +235,7 @@ namespace ApiProyecto.Controllers
         {
             using (var context = new ProyectoG7Entities())
             {
-                context.PRODUCTO.Add(producto);
+                context.PRODUCTOes.Add(producto);
                 context.SaveChanges();
                 return producto.ConProducto;
             }
@@ -247,7 +247,7 @@ namespace ApiProyecto.Controllers
         {
             using (var context = new ProyectoG7Entities())
             {
-                var datos = context.PRODUCTO.FirstOrDefault(x => x.ConProducto == tProducto.ConProducto);
+                var datos = context.PRODUCTOes.FirstOrDefault(x => x.ConProducto == tProducto.ConProducto);
 
                 if (datos != null)
                 {
@@ -267,7 +267,7 @@ namespace ApiProyecto.Controllers
             {
                 try
                 {
-                    var datos = context.PRODUCTO.Where(x => x.ConProducto == producto.ConProducto).FirstOrDefault();
+                    var datos = context.PRODUCTOes.Where(x => x.ConProducto == producto.ConProducto).FirstOrDefault();
                     datos.Nombre = producto.Nombre;
                     datos.ConModelo = producto.ConModelo;
                     datos.ConMarca = producto.ConMarca;

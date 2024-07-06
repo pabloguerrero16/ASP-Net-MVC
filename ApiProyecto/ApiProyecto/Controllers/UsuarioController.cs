@@ -18,7 +18,7 @@ namespace ApiProyecto.Controllers
                 using (var context = new ProyectoG7Entities())
                 {
                     context.Configuration.LazyLoadingEnabled = false;
-                    return (from x in context.USUARIO
+                    return (from x in context.USUARIOs
                             select x).ToList();
                 }
 
@@ -37,7 +37,7 @@ namespace ApiProyecto.Controllers
                 using (var context = new ProyectoG7Entities())
                 {
                     context.Configuration.LazyLoadingEnabled = false;
-                    var datos = (from x in context.USUARIO
+                    var datos = (from x in context.USUARIOs
                                  where x.ConUsuario == q
                                  select x).FirstOrDefault();
 
@@ -57,7 +57,7 @@ namespace ApiProyecto.Controllers
             {
                 using (var context = new ProyectoG7Entities())
                 {
-                    var datos = ( from x in context.PROVINCIA
+                    var datos = ( from x in context.PROVINCIAs
                                   select x).ToList();
 
                     var respuesta = new List<System.Web.Mvc.SelectListItem>();
@@ -82,7 +82,7 @@ namespace ApiProyecto.Controllers
             {
                 using (var context = new ProyectoG7Entities())
                 {
-                    var datos = (from x in context.USUARIO
+                    var datos = (from x in context.USUARIOs
                                  where x.ConUsuario == ent.ConUsuario
                                  select x).FirstOrDefault();
 
@@ -112,7 +112,7 @@ namespace ApiProyecto.Controllers
             {
                 using (var context = new ProyectoG7Entities())
                 {
-                    var datos = (from x in context.USUARIO
+                    var datos = (from x in context.USUARIOs
                                  where x.ConUsuario == ent.ConUsuario
                                  select x).FirstOrDefault();
 
@@ -139,7 +139,7 @@ namespace ApiProyecto.Controllers
             {
                 using (var context = new ProyectoG7Entities())
                 {
-                    var datos = (from x in context.CANTON
+                    var datos = (from x in context.CANTONs
                                  where x.IdProvincia == q
                                  select x).ToList();
 
@@ -165,7 +165,7 @@ namespace ApiProyecto.Controllers
         {
             using (var context = new ProyectoG7Entities())
             {
-                var datos = context.USUARIO.FirstOrDefault(x => x.ConUsuario == ent.ConUsuario);
+                var datos = context.USUARIOs.FirstOrDefault(x => x.ConUsuario == ent.ConUsuario);
 
                 if (datos != null)
                 {
